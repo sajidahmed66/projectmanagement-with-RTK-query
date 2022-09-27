@@ -6,6 +6,7 @@ import Teams from "./pages/Teams";
 import PublicRoute from "./components/PublicRoute";
 import PriveteRoute from "./components/ProtectedRoute";
 import useAuthCheck from "./hooks/useAuthCheck";
+import Dashboard from "./pages/Dashboard";
 function App() {
   const authCheck = useAuthCheck();
   return !authCheck ? (
@@ -25,7 +26,7 @@ function App() {
           path="/projects"
           element={
             <PriveteRoute>
-              <>Project Management DAshboard lalalala</>
+              <Dashboard />
             </PriveteRoute>
           }
         />
