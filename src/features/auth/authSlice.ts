@@ -20,6 +20,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     userLoggedIn: (state, action) => {
+      // console.log(actio)
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
     },
