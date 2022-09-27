@@ -16,7 +16,8 @@ const ProjectModal = ({ control, open }: IProjectModal) => {
   const [addProject, { isSuccess: ProjectSuccess }] = useAddProjectMutation();
   const { user: loggedInUser } = useAppSelector((state) => state.auth);
   const onSelect = (selectedList: any, selectedItem: any) => {
-    setTeam(selectedList);
+    console.log(selectedList);
+    setTeam(selectedList[0]);
   };
 
   const onRemove = (selectedList: any, removedItem: any) => {

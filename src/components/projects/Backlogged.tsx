@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import {
+  useGetBackloggedProjectsQuery,
+  useGetProjectsQuery,
+} from "../../features/projects/projectsApi";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 
 const Backlogged = () => {
   const [toggleModal, setToggleModal] = useState(false);
-
+  const {
+    data: projects,
+    isLoading,
+    isSuccess,
+  } = useGetBackloggedProjectsQuery({});
   const controlModal = () => {
     setToggleModal((pervState) => !pervState);
   };
@@ -36,7 +44,8 @@ const Backlogged = () => {
         </button>
       </div>
       <div className="flex flex-col pb-2 overflow-auto">
-        <ProjectCard />
+        {isSuccess &&
+          projects.map((p: any) => <ProjectCard key={p.id} project={p} />)}
       </div>
       <ProjectModal open={toggleModal} control={controlModal} />
     </div>

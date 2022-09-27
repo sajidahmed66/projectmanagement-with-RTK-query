@@ -7,6 +7,11 @@ const projectsApi = apiSlice.injectEndpoints({
         url: `/projects`,
       }),
     }),
+    getBackloggedProjects: builder.query({
+      query: () => ({
+        url: `/projects?status_like=backlog`,
+      }),
+    }),
     addProject: builder.mutation({
       query: (data) => ({
         url: `/projects`,
@@ -27,4 +32,5 @@ export const {
   useGetProjectsQuery,
   useAddProjectMutation,
   useDeleteProjectMutation,
+  useGetBackloggedProjectsQuery,
 } = projectsApi;
