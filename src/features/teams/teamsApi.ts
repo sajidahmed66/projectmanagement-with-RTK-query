@@ -24,16 +24,23 @@ export const teamsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
-        const team = await queryFulfilled;
-        console.log(team);
+      onQueryStarted: async ({ data }, { queryFulfilled, dispatch }) => {
         try {
-          if (team.data) {
-            dispatch(updateTeam(team.data));
-          }
-        } catch (err) {
-          console.log(err);
+          const { data: updatedTeam } = await queryFulfilled;
+          const patchResult = dispatch(
+            teamsApi.util.updateQueryData("getTeams", {}, (draft) => {
+              draft.push(updatedTeam);
+            })
+          );
+        } catch (error) {
+          console.log(error);
         }
+
+        // const patchResult = dispatch(
+        //   teamsApi.util.updateQueryData("getTeams", {}, (draft)=>{
+
+        //   })
+        // )
       },
     }),
   }),
