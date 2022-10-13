@@ -4,18 +4,18 @@ interface IModalProps {
   open: boolean;
   control: () => void;
 }
-const AddmembersModal = ({ control, open }: IModalProps) => {
+const ViewMembersModal = ({ control, open }: IModalProps) => {
   return open ? (
     <>
       <div
         onClick={control}
         className="fixed inset-0 z-10 w-full h-full cursor-pointer bg-black/50"
       ></div>
-      <div>AddmembersModal</div>;
+      <div>ViewmembersModal</div>;
     </>
   ) : (
     <></>
   );
 };
 
-export default AddmembersModal;
+export default ViewMembersModal;

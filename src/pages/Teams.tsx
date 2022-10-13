@@ -2,23 +2,38 @@ import React, { useState } from "react";
 import logoImage from "../assets/images/makamiIcon.png";
 import { Link, useLocation } from "react-router-dom";
 import TeamsModal from "../components/teams/TeamsModal";
+import TeamsCard from "../components/teams/TeamsCard";
+import AddMembersModal from "../components/teams/AddmembersModal";
+import ViewMembersModal from "../components/teams/ViewMembersModal";
 import {
   useGetTeamsQuery,
   useAddTeamsMutation,
 } from "../features/teams/teamsApi";
-import TeamsCard from "../components/teams/TeamsCard";
+
 import { IUser, ITeams } from "../features/teams/teamsSlice";
 import { useAppSelector } from "../app/hooks";
 const Teams = () => {
   const { pathname } = useLocation();
   const { user: loggedinUser } = useAppSelector((state) => state.auth);
+  //modal state
   const [opened, setOpened] = useState(false);
+  const [toggleAddMembersModal, setToggleAddMembersModal] = useState(false);
+  const [toggleViewMembersModal, setToggleViewMembersModal] = useState(false);
+  // query state
   const { data: teamsList, isLoading, isSuccess } = useGetTeamsQuery({});
-  console.log(teamsList);
+
+  // modal controls
   const controlModal = () => {
     setOpened((prevState) => !prevState);
   };
+  const controlAddMembersModal = () => {
+    setToggleAddMembersModal((prevState) => !prevState);
+  };
+  const controlViewMembersModal = () => {
+    setToggleViewMembersModal((prevState) => !prevState);
+  };
 
+  // content conditionally loading
   let content = null;
   if (isLoading) {
     content = "Loading teams...";
@@ -45,17 +60,23 @@ const Teams = () => {
     });
 
     content = userSpecificteams.map(
-      (teams: {
-        name: string;
-        title: string;
-        color: string;
-        members: IUser[] | undefined;
-      }) => (
+      (
+        teams: {
+          name: string;
+          title: string;
+          color: string;
+          members: IUser[] | undefined;
+        },
+        index
+      ) => (
         <TeamsCard
+          key={index}
           name={teams.name}
           title={teams.title}
           color={teams.color}
           members={teams.members}
+          controlAddMembersModal={controlAddMembersModal}
+          controlViewMembersModal={controlViewMembersModal}
         />
       )
     );
@@ -123,6 +144,16 @@ const Teams = () => {
       </div>
       {/* dispaly cards as card items in a grid format start */}
       <TeamsModal open={opened} control={controlModal} />
+
+      <AddMembersModal
+        open={toggleAddMembersModal}
+        control={controlAddMembersModal}
+      />
+
+      <ViewMembersModal
+        open={toggleViewMembersModal}
+        control={controlViewMembersModal}
+      />
     </div>
   );
 };
