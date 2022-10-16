@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IUser } from "../../features/teams/teamsSlice";
+import { IUser } from "../../features/teams/teams.types";
 
 interface ITeamsCard {
   name: string;

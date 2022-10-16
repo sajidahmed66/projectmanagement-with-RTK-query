@@ -18,6 +18,23 @@ const projectsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
+        try {
+          //  not working
+          const { data: addedProjectData } = await queryFulfilled;
+          const patchResult = dispatch(
+            projectsApi.util.updateQueryData(
+              "getBackloggedProjects",
+              {},
+              (draft) => {
+                draft.push(addedProjectData);
+              }
+            )
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
     }),
     deleteProject: builder.mutation({
       query: (id) => ({

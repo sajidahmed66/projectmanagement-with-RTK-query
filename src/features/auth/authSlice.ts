@@ -6,6 +6,7 @@ export interface authState {
     | {
         email: string;
         id: string;
+        name: string;
       }
     | undefined;
 }

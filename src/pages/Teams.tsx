@@ -9,9 +9,8 @@ import {
   useGetTeamsQuery,
   useAddTeamsMutation,
 } from "../features/teams/teamsApi";
-
-import { IUser, ITeams } from "../features/teams/teamsSlice";
 import { useAppSelector } from "../app/hooks";
+import { ITeams, IUser } from "../features/teams/teams.types";
 const Teams = () => {
   const { pathname } = useLocation();
   const { user: loggedinUser } = useAppSelector((state) => state.auth);

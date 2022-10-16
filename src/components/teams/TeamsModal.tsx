@@ -2,8 +2,9 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import Multiselect from "multiselect-react-dropdown";
 import { useAppSelector } from "../../app/hooks";
 import { useGetUsersQuery } from "../../features/user/userApi";
-import { ITeams, IUser } from "../../features/teams/teamsSlice";
+// import { ITeams, IUser } from "../../features/teams/teamsSlice";
 import { useAddTeamsMutation } from "../../features/teams/teamsApi";
+import { IUser } from "../../features/teams/teams.types";
 export interface IModalProps {
   open: boolean;
   control: () => void;

@@ -2,8 +2,8 @@ import Multiselect from "multiselect-react-dropdown";
 import React, { useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { useAddProjectMutation } from "../../features/projects/projectsApi";
+import { ITeams } from "../../features/teams/teams.types";
 import { useGetTeamsQuery } from "../../features/teams/teamsApi";
-import { ITeams } from "../../features/teams/teamsSlice";
 interface IProjectModal {
   open: boolean;
   control: () => void;

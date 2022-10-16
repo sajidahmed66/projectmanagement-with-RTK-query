@@ -1,20 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface IUser {
-  id: string | number;
-  email: string;
-}
-
-export interface ITeams {
-  id?: string | number;
-  name: string;
-  title: string;
-  color: string;
-  members: IUser[];
-}
-export interface IteamState {
-  teams: ITeams[] | undefined;
-}
+import { ITeams, IteamState } from "./teams.types";
 
 const initialState: IteamState = {
   teams: undefined,
